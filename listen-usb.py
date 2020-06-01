@@ -7,9 +7,10 @@ from pwn import *
 
 parser = argparse.ArgumentParser(description="0x539 tool.\nA tool to connect to thepowershell reversed shell from arduino mini pro.")
 parser.add_argument(
-                "--debug",
+                "-debug",
                         required=False,
-                                help='Error that oracle give us example: 404,500,200 OR in the dom example: "<h2>Padding Error<h2>"',
+                        action="store_true",
+                        help='debug mode will keep the cmd window open"',
                 )
 parser.add_argument("--lport", required=True, help="port example: 4444")
 parser.add_argument("--lhost", required=True, help="host example: attackerwebsite.com (or an ip 198.23.44.132)")
