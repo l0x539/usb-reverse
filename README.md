@@ -35,7 +35,7 @@ python3 pip install pwn
 
 ## Running the tool
 
-After cloning this repositort into your linux machine.
+After cloning this repository into your linux machine.
 
 ### Run the script listener
 
