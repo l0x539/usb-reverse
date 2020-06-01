@@ -1,12 +1,12 @@
 # 0x539 Tool
 
-This project is to connect a windows maching using an arduino to a listening serverusing a port and a host through TCP. 
+This project is to connect a windows maching using an arduino to a listening serverusing a port and a host through TCP.
+ 
+*Note: A video tutorial will be added on the main* [Lear Hacking](https://www.youtube.com/channel/UCGj2tNcFld-_tCZLSkFe4ww) *Youtube channel soon!*
 
 ## Getting Started
 
 Once the Arduino is plugged to the windows machine you'll have a powershell of that user.
-
-*Note: A video tutorial will be added on the main* [Lear Hacking](https://www.youtube.com/channel/UCGj2tNcFld-_tCZLSkFe4ww) *Youtube channel soon!*
 
 ### Prerequisites
 
