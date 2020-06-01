@@ -6,6 +6,8 @@ This project is to connect a windows maching using an arduino to a listening ser
 
 Once the Arduino is plugged to the windows machine you'll have a powershell of that user.
 
+*Note: A video tutorial will be added on the main* [Lear Hacking](https://www.youtube.com/channel/UCGj2tNcFld-_tCZLSkFe4ww) *Youtube channel soon!*
+
 ### Prerequisites
 
 To complete this complete this  you will first need to install the [Aduino IDE](https://www.arduino.cc/en/main/software), and a list of python packages.
