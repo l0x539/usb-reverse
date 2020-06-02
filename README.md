@@ -1,6 +1,6 @@
 # 0x539 Tool
 
-This project is to connect a windows maching using an arduino to a listening serverusing a port and a host through TCP.
+This project is to connect a windows maching using an arduino to a listening server using a port and a host through TCP.
  
 *Note: A video tutorial will be added on the main* [Lear Hacking](https://www.youtube.com/channel/UCGj2tNcFld-_tCZLSkFe4ww) *Youtube channel soon!*
 
@@ -10,7 +10,7 @@ Once the Arduino is plugged to the windows machine you'll have a powershell of t
 
 ### Prerequisites
 
-To complete this complete this  you will first need to install the [Aduino IDE](https://www.arduino.cc/en/main/software), and a list of python packages.
+To complete this you will first need to install the [Aduino IDE](https://www.arduino.cc/en/main/software), and a list of python packages.
 
 
 ```
@@ -35,7 +35,7 @@ python3 pip install pwn
 
 ## Running the tool
 
-After cloning this repositort into your linux machine.
+After cloning this repository into your linux machine.
 
 ### Run the script listener
 
@@ -84,7 +84,7 @@ kali@kali:~/Documents/tools/github-proj/usb-reverse$ python3 listen-usb.py --lpo
 kali@kali:~/Documents/tools/github-proj/usb-reverse$ ls
 arduino_qwerty.c  exploits  listen-usb.py  README.md
 ```
-Next thing to do is compile the Arduino c file in the Arduino IDE mentioned earlier, im not gonna go through that cause there's a plenty of tutorials out there to compile an Arduino c code and upload, so just google that, and ill leave a video explaining that later on.
+Next thing to do is compile the Arduino c file in the Arduino IDE mentioned earlier, im not gonna go through that cause there's a plenty of tutorials out there to compile an Arduino c code and upload, so just google that, or check this videos playlist [Arduino Workshop - Chapter One - Hello World Example](https://www.youtube.com/watch?v=Bz_s3D96C5c&list=PLPK2l9Knytg5s2dk8V09thBmNl2g5pRSr&index=8).
 
 Now once you plug in the Arduino on the usb port, you will be connected to the tool
 
