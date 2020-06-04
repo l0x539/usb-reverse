@@ -59,7 +59,12 @@ if args.keyboard in ["azerty", "qwerty"]:
             nf.close()
         f.close()
 
-HOST = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+try:
+    HOST = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+except ValueError:
+    HOST = ni.ifaddresses('ens3')[ni.AF_INET][0]['addr']
+
+
 PORT = args.lport
 
 print("[+] Listening..")
