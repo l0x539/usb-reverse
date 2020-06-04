@@ -118,7 +118,7 @@ Invoke-AllChecks"""
 
 
 def download_file(s, link, filename):
-    d = "cd %HOMEPATH%erProfile%\Documents\n$url = \"" + link + '''\"
+    d = "cd %UserProfile%\Documents\n$url = \"" + link + '''\"
     $output = \"'''+filename + """\"
     $start_time = Get-Date
     Invoke-WebRequest -Method Get -Uri $url -OutFile $output
