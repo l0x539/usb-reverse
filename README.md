@@ -45,19 +45,21 @@ To see the help menu of the tool listener:
 python3 listen-usb.py -h
 ```
 ```
-usage: listen-usb.py [-h] [-debug] --lport LPORT --lhost LHOST --keyboard
-                     KEYBOARD
+usage: listen-usb.py [-h] [-admin] [-debug] --lport LPORT --lhost LHOST --keyboard KEYBOARD
 
-0x539 tool. A tool to connect to thepowershell reversed shell from arduino mini
-pro.
+0x539 tool. A tool to connect to thepowershell reversed shell from arduino mini pro.
 
 optional arguments:
   -h, --help           show this help message and exit
+  -admin               get admin access to powershell but it hopefully press the yes to runAs."
   -debug               debug mode will keep the cmd window open"
   --lport LPORT        port example: 4444
-  --lhost LHOST        host example: attackerwebsite.com (or an ip
-                       198.23.44.132)
+  --lhost LHOST        host example: attackerwebsite.com (or an ip 198.23.44.132)
   --keyboard KEYBOARD  keyboard example: azerty (or qwerty)
+
+usage: listen-usb.py [-h] [-debug] --lport LPORT --lhost LHOST --keyboard
+                     KEYBOARD
+
 ```
 
 
@@ -115,12 +117,12 @@ Now that you're connected to the tool, you can interact with the powershell and 
 Type help to get the help menu
 
 ```
-
 commands:
     ps              connect to powershell
     upload          download file
     enumerate       enumerate windows vulnerabilities
     urlexec         execute a powershell script from a link
+    meterpreter     run meterpreter default port 9090
     help            open this help menu
     exit            quit this tool
 ```
@@ -141,6 +143,12 @@ Enumerate the windows privileges and informations.
 
 ### urlexec
 Execute a powershell script from a url
+
+### meterpreter (mp)
+generate a reverse tcp exe file to default lport 9090 (you can change the lports and lhost with the httpport all together), and run it in the victim's machine after disabling Windows defender (-admin must be specified after listen-usb.py before generating the arduino c payload), which prompt you a meterpreter (wigth all preveliges).
+```
+mp
+``` 
 
 ## Creator
 
