@@ -10,7 +10,7 @@ Once the Arduino is plugged to the windows machine you'll have a powershell of t
 
 ### Prerequisites
 
-To complete this you will first need to install the [Aduino IDE](https://www.arduino.cc/en/main/software), and a list of python packages.
+To complete this you will first need to install the [Arduino IDE](https://www.arduino.cc/en/main/software), and a list of python packages.
 
 
 ```
